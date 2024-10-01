@@ -1,0 +1,1 @@
+INSERT INTO author(name, address, contract) SELECT author_name, author_address, author_contract FROM book; 
