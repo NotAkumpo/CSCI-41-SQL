@@ -69,3 +69,8 @@ orders o ON c.customerno=o.customerno JOIN orderitem oi ON o.orderno=oi.orderno 
 WHERE b.retail=(SELECT MIN(retail) FROM book) ORDER BY c.firstname DESC;
 
 -- end of solution file --
+
+
+CREATE TABLE tablename (
+	
+)
