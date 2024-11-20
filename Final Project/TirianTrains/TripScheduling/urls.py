@@ -1,10 +1,11 @@
 from django.urls import path
 
-from .views import index
+from .views import TripScheduleView
+from .views import TripScheduleCreateView
 
 urlpatterns = [
-    path('', index, name='index'),
+    path('', TripScheduleView.as_view(), name='homepage'),
+    path('tripschedule/create', TripScheduleCreateView.as_view(), name='tripschedule-create'),
 ]
 
-# This might be needed, depending on your Django version
 app_name = "TripScheduling"

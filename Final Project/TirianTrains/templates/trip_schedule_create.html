@@ -1,0 +1,13 @@
+{% load static %}
+{% block title %}Trip Schedule Create{% endblock %}
+{% block content %}
+    <body>
+        <form method="POST">
+        <h2>Create a Trip Schedule: </h2>
+            {% csrf_token %}
+            {{ form.as_div }}
+            <button>Submit</button>
+        </form>
+    </body>
+</html>
+{% endblock %}
