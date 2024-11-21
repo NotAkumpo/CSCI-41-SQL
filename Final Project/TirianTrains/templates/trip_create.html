@@ -1,0 +1,21 @@
+{% load static %}
+{% block title %}Trip Create{% endblock %}
+{% block content %}
+    <body>
+        <form method="POST">
+        <h2>Create a Trip: </h2>
+            {% csrf_token %}
+            {{ form.as_div }}
+            <div>
+                <h4>Inter Town Trip</h4>
+                <p>Fill this form only if Trip Type is "ITR".</p>
+                {{ inter_town_trip_form.as_p }}
+            </div>
+            <div>
+                {{ local_trip_form.as_p }}
+            </div>
+            <button>Submit</button>
+        </form>
+    </body>
+</html>
+{% endblock %}

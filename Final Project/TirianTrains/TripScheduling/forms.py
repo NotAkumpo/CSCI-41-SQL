@@ -10,3 +10,18 @@ class TripScheduleForm(forms.ModelForm):
         widgets = {
             'date': forms.DateInput(attrs={'type': 'date'}),
         }
+
+class TripForm(forms.ModelForm):
+    class Meta:
+        model = Trip
+        fields = '__all__'
+
+class LocalTripForm(forms.ModelForm):
+    class Meta:
+        model = LocalTrip
+        fields = []
+
+class InterTownTripForm(forms.ModelForm):
+    class Meta:
+        model = InterTownTrip
+        fields = ['cost_in_lion_coins', 'duration_time']
