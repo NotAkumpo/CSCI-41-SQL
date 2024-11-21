@@ -1,0 +1,56 @@
+{% load static %}
+{% block title %}Trip Query{% endblock %}
+{% block content %}
+    <body>
+
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_div }}
+            <button>Submit</button>
+        </form>
+
+        <br>
+
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Trip ID</th>
+                    <th>Origin</th>
+                    <th>Destination</th>
+                    <th>Departure Time</th>
+                    <th>Arrival Time</th>
+                    <th>Train Number</th>
+                    <th>Trip Type</th>
+                    <th>Cost in Lion Coins</th>
+                    <th>Duration Time in Minutes</th>
+                </tr>
+            </thead>
+                {% for t in queries %}
+                    <tr>
+                        <td>{{ t.trip_id }}</td>
+                        <td>{{ t.origin }}</td>
+                        <td>{{ t.destination }}</td>
+                        <td>{{ t.departure_time }}</td>
+                        <td>{{ t.arrival_time }}</td>
+                        <td>{{ t.train_number }}</td>
+                        <td>{{ t.get_trip_type_display }}</td>
+                        <td>
+                            {% if t.inter_town_trips %}
+                                {{ t.inter_town_trips.cost_in_lion_coins }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if t.inter_town_trips %}
+                                {{ t.inter_town_trips.duration_time_in_minutes }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+        </table>
+    </body>
+{% endblock %}

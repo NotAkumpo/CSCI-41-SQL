@@ -1,0 +1,33 @@
+{% load static %}
+{% block title %}Trip Schedule Query{% endblock %}
+{% block content %}
+    <body>
+
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_div }}
+            <button>Submit</button>
+        </form>
+
+        <br>
+
+        <table border="2">
+            <thead>
+                <tr>
+                    <th>Trip Schedule ID</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            {% for ts in queries %}
+                <tr>
+                    <td>{{ ts.trip_schedule_id }}</td>
+                    <td>{{ ts.date }}</td>
+                </tr>
+            {% endfor %}
+
+        </table>
+        
+    </body>
+</html>
+{% endblock %}

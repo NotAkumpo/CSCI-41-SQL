@@ -33,9 +33,9 @@ class Trip(models.Model):
     LTR = "LTR"
     XXX = "XXX"
     TRIP_CHOICES = {
-        ITR: "Itr",
-        LTR: "Ltr",
-        XXX: "Xxx"
+        ITR: "ITR",
+        LTR: "LTR",
+        XXX: "XXX"
     }
 
     trip_type = models.CharField(
@@ -63,7 +63,7 @@ class Trip(models.Model):
 class InterTownTrip(models.Model):
     itr_trip = models.OneToOneField('Trip', on_delete=models.CASCADE, primary_key=True, default='XXXXX-00000', related_name='inter_town_trips')
     cost_in_lion_coins = models.IntegerField(null=False, default=0)
-    duration_time = models.TimeField(null=False, default='00:00:00')
+    duration_time_in_minutes = models.IntegerField(null=False, default=0)
 
     def __str__(self):
            return self.itr_trip.trip_id
