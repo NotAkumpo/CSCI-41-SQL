@@ -10,7 +10,7 @@ class TripSchedule(models.Model):
         validators=[MinLengthValidator(5)], 
         null=False, 
         default='XXXXX')
-    date = models.DateField(null=False, default='2010-01-01')
+    date = models.DateField(null=False, unique=True, default='2010-01-01')
 
     def __str__(self):
            return self.trip_schedule_id
@@ -48,9 +48,17 @@ class Trip(models.Model):
     trip_schedule = models.ForeignKey(
         'TripSchedule',
         on_delete=models.CASCADE,
-        related_name='local_trips',
+        related_name='trips',
         default='XXXXX',
-        related_query_name='trips'
+        related_query_name='tripss'
+    )
+
+    route = models.ForeignKey(
+        'Route',
+        on_delete=models.CASCADE,
+        related_name='trips',
+        default='XXXX',
+        related_query_name='tripss'
     )
 
     def __str__(self):
@@ -74,3 +82,34 @@ class LocalTrip(models.Model):
     def __str__(self):
            return self.ltr_trip.trip_id
 
+class Route(models.Model):
+    route_id = models.CharField(
+        primary_key=True, 
+        unique=True, 
+        max_length=8, 
+        validators=[MinLengthValidator(8)], 
+        null=False,
+        default='XXXX-000')
+    
+    IR = "IR"
+    LR = "LR"
+    XX = "XX"
+    ROUTE_CHOICES = {
+        IR: "IR",
+        LR: "LR",
+        XX: "XX"
+    }
+
+    route_type = models.CharField(
+        null=False, 
+        max_length=2,
+        validators=[MinLengthValidator(2)], 
+        default=XX,
+        choices=ROUTE_CHOICES)
+    expected_duration = models.TimeField(null=False, default='00:00:00')
+    starting_station = models.CharField(null=False,  max_length=255, default='XXXX')
+    ending_station = models.CharField(null=False,  max_length=255, default='XXXX')
+    number_of_trips = models.IntegerField(null=False, default=0)
+
+    def __str__(self):
+           return self.route_id

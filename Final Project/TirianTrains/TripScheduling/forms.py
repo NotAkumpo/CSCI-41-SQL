@@ -36,6 +36,10 @@ class TripQueryForm(forms.Form):
         required=False,
         label="Trip ID",
     )
+    trip_schedule_id = forms.CharField(
+        required=False,
+        label="Trip Schedule ID",
+    )
     origin = forms.CharField(
         required=False,
         label="Origin",

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 
 from django.http import HttpResponse
 from django.views.generic import TemplateView
@@ -83,7 +83,7 @@ def trip_schedule_queries(request):
     return render(request, 'trip_schedule_queries.html', context)
 
 def trip_queries(request):
-    queries = Trip.objects.select_related('inter_town_trips', 'local_trips')
+    queries = Trip.objects.select_related('inter_town_trips', 'local_trips').order_by('trip_schedule_id')
     form = TripQueryForm(request.POST or None)
 
     context = {
@@ -93,6 +93,7 @@ def trip_queries(request):
 
     if request.method == 'POST' and form.is_valid():
         trip_id = form.cleaned_data.get('trip_id')
+        trip_schedule_id = form.cleaned_data.get('trip_schedule_id')
         origin = form.cleaned_data.get('origin')
         destination = form.cleaned_data.get('destination')
         departure_time = form.cleaned_data.get('departure_time')
@@ -104,6 +105,8 @@ def trip_queries(request):
 
         if trip_id:
             queries = queries.filter(trip_id__exact=trip_id)
+        if trip_schedule_id:
+            queries = queries.filter(trip_schedule_id__exact=trip_schedule_id)
         if origin:
             queries = queries.filter(origin__exact=origin)
         if destination:
@@ -127,3 +130,27 @@ def trip_queries(request):
         }
 
     return render(request, 'trip_queries.html', context)
+
+class TripScheduleUpdateView(UpdateView):
+    model = TripSchedule
+    form_class = TripScheduleForm
+    template_name = 'trip_schedule_update.html'
+
+    def get_success_url(self):
+        return reverse_lazy('TripScheduling:tripschedule-queries')
+    
+class TripUpdateView(UpdateView):
+    model = Trip
+    form_class = TripForm
+    template_name = 'trip_update.html'
+
+    def get_success_url(self):
+        return reverse_lazy('TripScheduling:trip-queries')
+    
+class InterTownTripUpdateView(UpdateView):
+    model = InterTownTrip
+    form_class = InterTownTripForm
+    template_name = 'ittrip_update.html'
+
+    def get_success_url(self):
+        return reverse_lazy('TripScheduling:trip-queries')

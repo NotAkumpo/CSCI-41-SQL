@@ -1,16 +1,21 @@
+{% extends 'taskbar.html' %}
 {% load static %}
 {% block title %}Trip Schedule Query{% endblock %}
 {% block content %}
+    <head>
+        <title>Trip Schedule Query</title>
+    </head>
     <body>
 
+        <h1>Query Trip Schedules:</h1>
 
         <form method="POST">
             {% csrf_token %}
             {{ form.as_div }}
-            <button>Submit</button>
+            <button>SELECT</button>
         </form>
 
-        <br>
+        <h2>Query Results:</h2>
 
         <table border="2">
             <thead>
@@ -21,7 +26,7 @@
             </thead>
             {% for ts in queries %}
                 <tr>
-                    <td>{{ ts.trip_schedule_id }}</td>
+                    <td><a href="{% url 'TripScheduling:tripschedule-update' ts.pk %}">{{ ts.trip_schedule_id }}</a></td>
                     <td>{{ ts.date }}</td>
                 </tr>
             {% endfor %}

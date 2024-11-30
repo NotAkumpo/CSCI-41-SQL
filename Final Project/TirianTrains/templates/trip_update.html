@@ -1,16 +1,16 @@
 {% extends 'taskbar.html' %}
 {% load static %}
-{% block title %}Trip Schedule Create{% endblock %}
+{% block title %}Update Trip{% endblock %}
 {% block content %}
     <head>
-        <title>Trip Schedule Insert</title>
+        <title>Trip Update</title>
     </head>
     <body>
+        <h1>Update a Trip: </h1>
         <form method="POST">
-        <h1>Insert a Trip Schedule: </h1>
             {% csrf_token %}
             {{ form.as_div }}
-            <button>INSERT</button>
+            <button>UPDATE</button>
         </form>
     </body>
 </html>

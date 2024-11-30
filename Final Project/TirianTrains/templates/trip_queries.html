@@ -1,21 +1,28 @@
+{% extends 'taskbar.html' %}
 {% load static %}
 {% block title %}Trip Query{% endblock %}
 {% block content %}
+    <head>
+        <title>Trip Query</title>
+    </head>
     <body>
 
+        <h1>Query Trips: </h1>
 
         <form method="POST">
             {% csrf_token %}
             {{ form.as_div }}
-            <button>Submit</button>
+            <button>SELECT</button>
         </form>
 
-        <br>
+
+        <h2>Query Results:</h2>
 
         <table border="2">
             <thead>
                 <tr>
                     <th>Trip ID</th>
+                    <th>Trip Schedule</th>
                     <th>Origin</th>
                     <th>Destination</th>
                     <th>Departure Time</th>
@@ -28,7 +35,8 @@
             </thead>
                 {% for t in queries %}
                     <tr>
-                        <td>{{ t.trip_id }}</td>
+                        <td><a href="{% url 'TripScheduling:trip-update' t.pk %}">{{ t.trip_id }}</a></td>
+                        <td>{{ t.trip_schedule_id }}</td>
                         <td>{{ t.origin }}</td>
                         <td>{{ t.destination }}</td>
                         <td>{{ t.departure_time }}</td>
@@ -37,7 +45,7 @@
                         <td>{{ t.get_trip_type_display }}</td>
                         <td>
                             {% if t.inter_town_trips %}
-                                {{ t.inter_town_trips.cost_in_lion_coins }}
+                                <a href="{% url 'TripScheduling:ittrip-update' t.inter_town_trips.pk %}">{{ t.inter_town_trips.cost_in_lion_coins }}</a>
                             {% else %}
                                 N/A
                             {% endif %}

@@ -1,27 +1,12 @@
+{% extends 'taskbar.html' %}
 {% load static %}
 {% block title %}Homepage{% endblock %}
 {% block content %}
+    <head>
+        <title>Trip Scheduling Homepage</title>
+    </head>
+
     <body>
-        <table width="100%" height="40px" border="1">
-
-            <td width="16%" align="center"><b>Navigation Bar:</b></td>
-    
-            <td width="16%" align="center"><b><a href="{% url 'TripScheduling:tripschedule-create' %}">
-            Create a Trip Schedule</a></b></td>
-    
-            <td width="16%" align="center"><b><a href="{% url 'TripScheduling:tripschedule-queries' %}">
-            Show/Query Trip Schedules</a></b></td>
-    
-            <td width="16%" align="center"><b><a href="{% url 'TripScheduling:trip-create' %}">
-            Create a Trip</a></b></td>
-    
-            <td width="16%" align="center"><b><a href="{% url 'TripScheduling:trip-queries' %}">
-            Show/Query Trips</a></b></td>
-    
-        </table>
-
-        
-
-
+        <h1>Welcome to the Trip Scheduling Function Prototype!</h1>
     </body>
 {% endblock %}

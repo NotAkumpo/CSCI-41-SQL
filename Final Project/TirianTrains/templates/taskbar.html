@@ -1,0 +1,29 @@
+<html lang="en">
+    <body>
+        <table width="100%" height="40px" border="1">
+
+            <td width="16%" align="center"><b><a href="{% url 'TripScheduling:homepage' %}">
+                Home</a></b></td>
+    
+            <td width="16%" align="center"><b><a href="{% url 'TripScheduling:tripschedule-create' %}">
+            Insert a Trip Schedule</a></b></td>
+    
+            <td width="16%" align="center"><b><a href="{% url 'TripScheduling:tripschedule-queries' %}">
+            Query Trip Schedules</a></b></td>
+    
+            <td width="16%" align="center"><b><a href="{% url 'TripScheduling:trip-create' %}">
+            Insert a Trip</a></b></td>
+    
+            <td width="16%" align="center"><b><a href="{% url 'TripScheduling:trip-queries' %}">
+            Query Trips</a></b></td>
+    
+        </table>
+
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+        {% block scripts %}{% endblock %}
+
+
+    </body>
+</html>
